@@ -23,40 +23,26 @@ It is important to note that some of what is listed below will not be included a
 
 ### Section 1: Modules
 
-[ ] Wires
-
-[ ] The Button
-
-[ ] Keypads
-
-[ ] Simon Says
-
-[ ] Who's on First
-
-[ ] Memory
-
-[ ] Morse Code
-
-[ ] Complicated Wires
-
-[ ] Wire Sequences
-
-[ ] Mazes
-
-[ ] Passwords
+- [ ] Wires
+- [ ] The Button
+- [ ] Keypads
+- [ ] Simon Says
+- [ ] Who's on First
+- [ ] Memory
+- [ ] Morse Code
+- [ ] Complicated Wires
+- [ ] Wire Sequences
+- [ ] Mazes
+- [ ] Passwords
 
 ### Section 2: Needy Modules
 
-[ ] Venting Gas
-
-[ ] Capacitor Discharge
-
-[ ] Knobs
+- [ ] Venting Gas
+- [ ] Capacitor Discharge
+- [ ] Knobs
 
 ### Appendices
 
-[ ] A: Indicator Identification Reference
-
-[ ] B: Battery Identification Reference
-
-[ ] C: Port Identification Reference
+- [ ] A: Indicator Identification Reference
+- [ ] B: Battery Identification Reference
+- [ ] C: Port Identification Reference
