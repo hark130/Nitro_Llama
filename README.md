@@ -11,7 +11,7 @@ Manual:
 
 - Version: 1
 - Verification Code: 241
-- Found [here](www.keeptalkinggame.com)
+- Found [here](https://www.bombmanual.com/)
 
 Software Versions:
 
