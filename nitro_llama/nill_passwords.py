@@ -139,8 +139,8 @@ def _find_password(user_input: Tuple):
     # guess_num = 0  # DEBUGGING
     for index in index_order:
         # guess_num += 1  # DEBUGGING
-        currList = [word for word in currList
-                    if word[index] in user_input[index]]
+        currList = [word for word in currList if word[index] in
+            [char.lower() for char in user_input[index]]]
         if len(currList) == 1:
             # print(f'FOUND IT IN {guess_num} GO')  # DEBUGGING
             break
