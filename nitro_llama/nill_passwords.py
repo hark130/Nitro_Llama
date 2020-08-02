@@ -24,11 +24,20 @@ LIST_OF_PWDS = [
 
 def find_password():
     '''
-    TO DO: DON'T DO NOW... Docstring
+    Purpose: Read user input, find a match, and print it
+    Notes:
+        This is the entry-level function but unit testing should be performed
+            against _find_password() if you want to avoid mocking user input.
+    Exceptions:
+        RuntimeError for problems with "matching"
+        ValueErrors for bad values (likely a user error)
+        TypeError for bad data types (internal error)
+    Returns: None
     '''
     # LOCAL VARIABLES
     user_input = _input_pwds()          # Manual user input from KTaNE
     match = _find_password(user_input)  # Matched password based on user input
+
     # DONE
     print(match)
 
