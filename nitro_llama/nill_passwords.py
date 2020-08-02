@@ -62,7 +62,14 @@ def _input_pwds():
 
 def _validate_user_input(user_input: Tuple):
     '''
-    TO DO: DON'T DO NOW... Docstring
+    Purpose: Validate the user input on behalf of the entry level function
+    Parameters:
+        user_input - A tuple with five string-based entries containing
+            per-position input.
+    Exceptions:
+        TypeError for an invalid data type
+        ValueError for an invalid value
+    Returns: None
     '''
     # LOCAL VARIABLES
     min_chars = 6  # Minimum characters per password position
