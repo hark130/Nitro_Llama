@@ -4,6 +4,7 @@ import unittest
 # Local Imports
 from nitro_llama.nill_passwords import _find_password
 
+
 class Passwords_Unit_Tests(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
