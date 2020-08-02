@@ -346,5 +346,6 @@ class Passwords_Unit_Tests_Special(Passwords_Unit_Tests):
             ['jqxpcnro', 'jqxiftup', 'jqxpwkhr', 'jqxiwehmo', 'jqxprbie'])
         self.run_test_pass('other', test_input)
 
+
 if __name__ == '__main__':
     unittest.main(verbosity=2, exit=False)
