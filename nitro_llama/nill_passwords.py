@@ -79,7 +79,7 @@ def _validate_user_input(user_input: Tuple):
         raise TypeError('The "user_input" argument is of type '
                         f'{type(user_input)} instead of a tuple')
     elif 5 != len(user_input):
-        raise ValueError('The "user_input" argument is holds '
+        raise ValueError('The "user_input" argument holds '
                          f'{len(user_input)} positions instead of 5')
     else:
         for entry in user_input:
@@ -92,7 +92,11 @@ def _validate_user_input(user_input: Tuple):
                                  f'characters instead of {min_chars}')
             else:
                 for char in entry:
-                    if not char.isalpha():
+                    if not isinstance(char, str):
+                        raise TypeError('The "user_input" argument contains '
+                                        'an entry with a non-string '
+                                        f'of type {type(char)}')
+                    elif not char.isalpha():
                         raise ValueError('The "user_input" argument contains '
                                          'an entry with a non-alphabet '
                                          f'character: {entry}')
