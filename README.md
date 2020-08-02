@@ -17,6 +17,18 @@ Software Versions:
 
 - Python 3.6.9
 
+## Usage
+
+From the top-level repository directory:
+
+### Python
+
+`python3 -m python3 -m nitro_llama`
+
+### Unit Tests
+
+`python3 -m test.test_passwords`
+
 ## Completed Features
 
 It is important to note that some of what is listed below will not be included as a "feature".
