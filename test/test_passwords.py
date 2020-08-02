@@ -233,7 +233,7 @@ class Passwords_Unit_Tests_Error(Passwords_Unit_Tests):
 
     def test_error_08(self):
         '''
-        Error 81 - Parameter contains input that has no match
+        Error 8 - Parameter contains input that has no match
         '''
         test_input = self.prepare_test_input(
             ['pcnrox', 'ifjtup', 'pwkhqr', 'iwehmo', 'jqxazo'])
@@ -249,6 +249,102 @@ class Passwords_Unit_Tests_Error(Passwords_Unit_Tests):
         exp_err_msg = "Too many password matches: ['about', 'small', 'where']"
         self.run_test_fail(test_input, RuntimeError, exp_err_msg)
 
+
+class Passwords_Unit_Tests_Boundary(Passwords_Unit_Tests):
+
+    def test_boundary_01(self):
+        '''
+        Boundary 1 - Standard, valid, normalized input from actual gameplay
+        Notes:
+            This test may mirror input from a Normal unit test but here it
+                represents the minimum valid input
+        '''
+        test_input = self.prepare_test_input(
+            ['pcnrox', 'ifjtup', 'pwkhqr', 'iwehmo', 'prxbie'])
+        self.run_test_pass('other', test_input)
+
+    def test_boundary_02(self):
+        '''
+        Boundary 2 - Valid input from actual gameplay with "typos" thrown in
+        Notes:
+            In the heat of the moment mistakes are made: spoken language
+                is misunderstood, "state" is forgotten, etc.
+        '''
+        test_input = self.prepare_test_input(
+            ['pcnroxpcnroxp', 'ifjtupjqx', 'pwkhqriwe', 'iwehmo', 'prxbie'])
+        self.run_test_pass('other', test_input)
+
+    def test_boundary_03(self):
+        '''
+        Boundary 7 - Invalid input based on input from actual gameplay
+        Notes:
+            This test may mirror input from an Error unit test but it has
+                been subtly changed.  The thought here is the user hits
+                the final return prematurely.
+        '''
+        test_input = tuple((['p', 'c', 'n', 'r', 'o', 'x'],
+                            ['i', 'f', 'j', 't', 'u', 'p'],
+                            ['p', 'w', 'k', 'h', 'q', 'r'],
+                            ['i', 'w', 'e', 'h', 'm', 'o'],
+                            ['p', 'r', 'x', 'b', 'i']))
+        exp_err_msg = 'The "user_input" argument contained a ' + \
+                      'list that contained 5 characters instead of 6'
+        self.run_test_fail(test_input, ValueError, exp_err_msg)
+
+
+class Passwords_Unit_Tests_Special(Passwords_Unit_Tests):
+
+    def test_special_01(self):
+        '''
+        Special 1 - Parameter contains non-alphabet input from user (number)
+        '''
+        test_input = tuple((['p', 'c', 'n', 'r', 'o', 'x'],
+                            ['i', 'f', 'j', 't', 'u', 'p'],
+                            ['p', 'w', 'k', 'h', 'q', 'r'],
+                            ['i', 'w', '3', 'h', 'm', 'o'],
+                            ['p', 'r', 'x', 'b', 'i', 'e']))
+        exp_err_msg = 'The "user_input" argument contains ' + \
+                      'an entry with a non-alphabet character: ' + \
+                      "['i', 'w', '3', 'h', 'm', 'o']"
+        self.run_test_fail(test_input, ValueError, exp_err_msg)
+
+    def test_special_02(self):
+        '''
+        Special 2 - Parameter contains non-alphabet input from user
+            (symbol)
+        '''
+        test_input = tuple((['p', 'c', 'n', 'r', 'o', 'x'],
+                            ['i', 'f', 'j', 't', 'u', 'p'],
+                            ['p', 'w', 'k', 'h', 'q', 'r'],
+                            ['i', 'w', '#', 'h', 'm', 'o'],
+                            ['p', 'r', 'x', 'b', 'i', 'e']))
+        exp_err_msg = 'The "user_input" argument contains ' + \
+                      'an entry with a non-alphabet character: ' + \
+                      "['i', 'w', '#', 'h', 'm', 'o']"
+        self.run_test_fail(test_input, ValueError, exp_err_msg)
+
+    def test_special_03(self):
+        '''
+        Special 1 - Standard, valid, normalized input from actual gameplay...
+            but the CAPS LOCK IS ON
+        Note:
+            CaSe ShOuLdN't MaTtEr WhEn DiFfUsInG a BoMb!
+            The user input function from nill_passwords.py should be
+                handling this already but (SPOILER ALERT), input could be
+                coming from somewhere else.
+        '''
+        test_input = self.prepare_test_input(
+            ['PCNROX', 'IFJTUP', 'PWKHQR', 'IWEHMO', 'PRXBIE'])
+        self.run_test_pass('other', test_input)
+
+    def test_special_04(self):
+        '''
+        Special 4 - Standard, valid, normalized input from actual gameplay
+            that also includes unused characters: j, q, x.
+        '''
+        test_input = self.prepare_test_input(
+            ['jqxpcnro', 'jqxiftup', 'jqxpwkhr', 'jqxiwehmo', 'jqxprbie'])
+        self.run_test_pass('other', test_input)
 
 if __name__ == '__main__':
     unittest.main(verbosity=2, exit=False)
