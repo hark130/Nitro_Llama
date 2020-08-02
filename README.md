@@ -45,7 +45,7 @@ It is important to note that some of what is listed below will not be included a
 - [ ] Complicated Wires
 - [ ] Wire Sequences
 - [ ] Mazes
-- [ ] Passwords
+- [X] Passwords
 
 ### Section 2: Needy Modules
 
