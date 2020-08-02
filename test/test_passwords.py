@@ -13,7 +13,7 @@ class Passwords_Unit_Tests(unittest.TestCase):
         self.test_error = 'ERROR: '  # Standardize exceptions of failed tests
         super().__init__(*args, **kwargs)
 
-    def execute_pass_test(self, expected_str: str, test_input: tuple):
+    def run_test_pass(self, expected_str: str, test_input: tuple):
         '''
         Purpose: Execute the test, respond to results, provide verbose
             human-readable feedback on failures
@@ -86,7 +86,7 @@ class Passwords_Unit_Tests_Normal(Passwords_Unit_Tests):
         '''
         test_input = self.prepare_test_input(
             ['pcnrox', 'ifjtup', 'pwkhqr', 'iwehmo', 'prxbie'])
-        self.execute_pass_test('other', test_input)
+        self.run_test_pass('other', test_input)
 
     def test_normal_02(self):
         '''
@@ -94,7 +94,7 @@ class Passwords_Unit_Tests_Normal(Passwords_Unit_Tests):
         '''
         test_input = self.prepare_test_input(
             ['fazund', 'oairyg', 'hdytav', 'bqiagr', 'dlnqrg'])
-        self.execute_pass_test('again', test_input)
+        self.run_test_pass('again', test_input)
 
     def test_normal_03(self):
         '''
@@ -102,7 +102,7 @@ class Passwords_Unit_Tests_Normal(Passwords_Unit_Tests):
         '''
         test_input = self.prepare_test_input(
             ['wabosh', 'wirngh', 'courig', 'ywtzfx', 'hpegcu'])
-        self.execute_pass_test('write', test_input)
+        self.run_test_pass('write', test_input)
 
     def test_normal_04(self):
         '''
@@ -110,7 +110,7 @@ class Passwords_Unit_Tests_Normal(Passwords_Unit_Tests):
         '''
         test_input = self.prepare_test_input(
             ['zdsnqo', 'gyrmtc', 'wohcin', 'xgklmf', 'kzsblj'])
-        self.execute_pass_test('still', test_input)
+        self.run_test_pass('still', test_input)
 
     def test_normal_05(self):
         '''
@@ -118,7 +118,7 @@ class Passwords_Unit_Tests_Normal(Passwords_Unit_Tests):
         '''
         test_input = self.prepare_test_input(
             ['krsdxf', 'tkcgiy', 'noizbu', 'rdfyxs', 'wufkyx'])
-        self.execute_pass_test('study', test_input)
+        self.run_test_pass('study', test_input)
 
 
 if __name__ == '__main__':
