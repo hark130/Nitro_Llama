@@ -60,6 +60,33 @@ class Passwords_Unit_Tests(unittest.TestCase):
         # DONE
         return tuple((pos1, pos2, pos3, pos4, pos5))
 
+    def run_test_fail(self, test_input, exception_type,
+                      exception_msg: str):
+        '''
+        Purpose: Execute the test, respond to results, provide verbose
+            human-readable feedback on failures
+        Parameters:
+            formatted_input: input, valid or otherwise, to pass to the
+                function call
+            exception_type: The type of exception to expect
+            exception_msg: The exception message, as a string, to expect
+        Notes:
+            This method checks exception_msg against the Exception's args[0]
+        Returns: None
+        '''
+        try:
+            _find_password(test_input)
+        except exception_type as err:
+            if err.args[0] != exception_msg:
+                self.fail(f'Expected "{exception_msg}" but received '
+                          f'"{err.args[0]}"')
+        except Exception as err:
+            self.fail(f'Expected {exception_type}({exception_msg}) but '
+                      f'received {repr(err)}')
+        else:
+            self.fail(f'Expected {exception_type}({exception_msg}) but '
+                      'no Exception was raised')
+
     def split_string(self, word: str):
         # LOCAL VARIABLES
         ret_list = []
@@ -119,6 +146,108 @@ class Passwords_Unit_Tests_Normal(Passwords_Unit_Tests):
         test_input = self.prepare_test_input(
             ['krsdxf', 'tkcgiy', 'noizbu', 'rdfyxs', 'wufkyx'])
         self.run_test_pass('study', test_input)
+
+
+class Passwords_Unit_Tests_Error(Passwords_Unit_Tests):
+
+    def test_error_01(self):
+        '''
+        Error 1 - Parameter is the wrong type (not a tuple)
+        '''
+        test_input = ['pcnrox', 'ifjtup', 'pwkhqr', 'iwehmo', 'prxbie']
+        exp_err_msg = 'The "user_input" argument is of type ' + \
+                      f'{type(test_input)} instead of a tuple'
+        self.run_test_fail(test_input, TypeError, exp_err_msg)
+
+    def test_error_02(self):
+        '''
+        Error 2 - Parameter doesn't have enough elements (4)
+        '''
+        test_input = self.prepare_test_input(
+            ['pcnrox', 'ifjtup', 'pwkhqr', 'iwehmo', 'prxbie'])[:4]
+        exp_err_msg = 'The "user_input" argument holds ' + \
+                      f'{len(test_input)} positions instead of 5'
+        self.run_test_fail(test_input, ValueError, exp_err_msg)
+
+    def test_error_03(self):
+        '''
+        Error 3 - Parameter has too many elements (6)
+        '''
+        test_input = self.prepare_test_input(
+            ['pcnrox', 'ifjtup', 'pwkhqr', 'iwehmo', 'prxbie'])
+        test_input = test_input + tuple((test_input[0]))
+        exp_err_msg = 'The "user_input" argument holds ' + \
+                      f'{len(test_input)} positions instead of 5'
+        self.run_test_fail(test_input, ValueError, exp_err_msg)
+
+    def test_error_04(self):
+        '''
+        Error 4 - Parameter contains a non-list element
+        '''
+        test_input = self.prepare_test_input(
+            ['pcnrox', 'ifjtup', 'pwkhqr', 'iwehmo', 'prxbie'])[:4] + \
+            tuple(('X'))
+        exp_err_msg = 'The "user_input" argument contains a ' + \
+                      f'non-list of type {type(test_input[4])}'
+        self.run_test_fail(test_input, TypeError, exp_err_msg)
+
+    def test_error_05(self):
+        '''
+        Error 5 - Parameter contains an empty list element
+        '''
+        test_input = tuple((['p', 'c', 'n', 'r', 'o', 'x'],
+                            ['i', 'f', 'j', 't', 'u', 'p'],
+                            ['p', 'w', 'k', 'h', 'q', 'r'],
+                            ['i', 'w', 'e', 'h', 'm', 'o'],
+                            []))
+        exp_err_msg = 'The "user_input" argument contained a ' + \
+                      f'list that contained {len(test_input[4])} ' + \
+                      'characters instead of 6'
+        self.run_test_fail(test_input, ValueError, exp_err_msg)
+
+    def test_error_06(self):
+        '''
+        Error 6 - Parameter contains a list element with a non-string
+        '''
+        test_input = tuple((['p', 'c', 'n', 'r', 'o', 'x'],
+                            ['i', 'f', 'j', 't', 'u', 'p'],
+                            ['p', 'w', 'k', 'h', 'q', 'r'],
+                            ['i', 'w',  3,  'h', 'm', 'o'],
+                            ['p', 'r', 'x', 'b', 'i', 'e']))
+        exp_err_msg = 'The "user_input" argument contains ' + \
+                      f'an entry with a non-string of type {type(3)}'
+        self.run_test_fail(test_input, TypeError, exp_err_msg)
+
+    def test_error_07(self):
+        '''
+        Error 7 - Parameter contains a list with non enough input
+        '''
+        test_input = tuple((['p', 'c', 'n', 'r', 'o', 'x'],
+                            ['i', 'f', 'j', 't', 'u', 'p'],
+                            ['p', 'w', 'k', 'h', 'r'],
+                            ['i', 'w', 'e', 'h', 'm', 'o'],
+                            ['p', 'r', 'x', 'b', 'i', 'e']))
+        exp_err_msg = 'The "user_input" argument contained a ' + \
+                      'list that contained 5 characters instead of 6'
+        self.run_test_fail(test_input, ValueError, exp_err_msg)
+
+    def test_error_08(self):
+        '''
+        Error 81 - Parameter contains input that has no match
+        '''
+        test_input = self.prepare_test_input(
+            ['pcnrox', 'ifjtup', 'pwkhqr', 'iwehmo', 'jqxazo'])
+        exp_err_msg = 'Password not found'
+        self.run_test_fail(test_input, RuntimeError, exp_err_msg)
+
+    def test_error_09(self):
+        '''
+        Error 9 - Parameter is the wrong type (not a tuple)
+        '''
+        test_input = self.prepare_test_input(
+            ['awsjqx', 'bhmjqx', 'oeajqx', 'urljqx', 'teljqx'])
+        exp_err_msg = "Too many password matches: ['about', 'small', 'where']"
+        self.run_test_fail(test_input, RuntimeError, exp_err_msg)
 
 
 if __name__ == '__main__':
