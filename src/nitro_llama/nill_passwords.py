@@ -23,6 +23,9 @@ LIST_OF_PWDS = [
 
 
 def find_password():
+    '''
+    TO DO: DON'T DO NOW... Docstring
+    '''
     # LOCAL VARIABLES
     user_input = _input_pwds()          # Manual user input from KTaNE
     match = _find_password(user_input)  # Matched password based on user input
@@ -49,6 +52,9 @@ def _input_pwds():
 
 
 def _validate_user_input(user_input: Tuple):
+    '''
+    TO DO: DON'T DO NOW... Docstring
+    '''
     # LOCAL VARIABLES
     min_chars = 6  # Minimum characters per password position
 
