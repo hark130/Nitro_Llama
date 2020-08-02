@@ -96,23 +96,34 @@ def _find_password(user_input: Tuple):
     Returns: A string containing the single password.
     '''
     # LOCAL VARIABLES
-    password = ''            # Discrete password from the manual
-    currList = LIST_OF_PWDS  # Shortened "starting point" list
+    password = ''                  # Discrete password from the manual
+    currList = LIST_OF_PWDS        # Shortened "starting point" list
+    # index_order = [2, 4, 1, 3, 0]  # Index order to follow  3.4 avg loops
+    # index_order = [2, 4, 0, 1, 3]  # Index order to follow  3.6 avg loops
+    # index_order = [0, 1, 2, 3, 4]  # Index order to follow  3.6 avg loops
+    index_order = [4, 3, 2, 1, 0]  # Index order to follow  3.2 avg loops
+    # index_order = [0, 3, 1, 4, 2]  # Index order to follow  3.4 avg loops
 
     # INPUT VALIDATION
+    # index_order
+    # NOTE: Validating local variable because of its importance in execution
+    for index in range(0, len(currList[0])):
+        if index not in index_order:
+            raise ValueError(f'Missing index: {index}')
+    if len(index_order) != 5:
+        raise ValueError('Extra index detected')
+    # user_input
     _validate_user_input(user_input)
 
     # FIND IT
-    currList = [word for word in currList if word[2] in user_input[2]]
-    print(currList)  # DEBUGGING
-    currList = [word for word in currList if word[4] in user_input[4]]
-    print(currList)  # DEBUGGING
-    currList = [word for word in currList if word[0] in user_input[0]]
-    print(currList)  # DEBUGGING
-    currList = [word for word in currList if word[1] in user_input[1]]
-    print(currList)  # DEBUGGING
-    currList = [word for word in currList if word[3] in user_input[3]]
-    print(currList)  # DEBUGGING
+    # guess_num = 0  # DEBUGGING
+    for index in index_order:
+        # guess_num += 1  # DEBUGGING
+        currList = [word for word in currList \
+                    if word[index] in user_input[index]]
+        if len(currList) == 1:
+            # print(f'FOUND IT IN {guess_num} GO')  # DEBUGGING
+            break
 
     # DONE
     if 1 == len(currList):
