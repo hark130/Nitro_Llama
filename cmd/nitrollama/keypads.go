@@ -1,3 +1,6 @@
+// go build keypads.go
+// ./keypads
+
 package main
 
 import (
